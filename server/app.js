@@ -1,23 +1,14 @@
 const dotenv = require('dotenv')
-const mongoose = require('mongoose')
 const express = require('express')
 const app = express()
 
 dotenv.config({path:'./config.env'})
+require('./db/conn')
+// const USER = require('./model/userSchemar')
 
-const DB = process.env.DATABASE
 const PORT  = process.env.PORT
 
-mongoose.connect(DB, { 
-        useNewUrlParser: true, 
-        useUnifiedTopology: true,
-        useCreateIndex: true,
-        useFindAndModify: false
-        })
-        .then(()=>{
-             console.log(`Connection Successfull`)
-        })
-        .catch((err) => console.log(`no connection`))
+
 
 //Middleware
 const middleware = (req,res,next)=>{
