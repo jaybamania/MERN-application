@@ -1,8 +1,12 @@
+const dotenv = require('dotenv')
 const mongoose = require('mongoose')
 const express = require('express')
 const app = express()
 
-const DB = 'mongodb+srv://jaybamania:jaybamania@cluster0.mrtro.mongodb.net/mernstack?retryWrites=true&w=majority'
+dotenv.config({path:'./config.env'})
+
+const DB = process.env.DATABASE
+const PORT  = process.env.PORT
 
 mongoose.connect(DB, { 
         useNewUrlParser: true, 
@@ -42,5 +46,5 @@ console.log('Hello World')
 
 
 app.listen(3000, ()=>{
-    console.log(`server is running at port 3000`)
+    console.log(`server is running at port ${PORT}`)
 })
