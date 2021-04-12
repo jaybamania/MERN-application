@@ -4,10 +4,13 @@ const app = express()
 
 dotenv.config({path:'./config.env'})
 require('./db/conn')
-// const USER = require('./model/userSchemar')
+app.use(express.json())
+// const USER = require('./model/userSchema')
 
 const PORT  = process.env.PORT
 
+//linking router files
+app.use(require('./router/auth'))
 
 
 //Middleware
@@ -16,10 +19,9 @@ const middleware = (req,res,next)=>{
     next()
 }
 
-
-app.get('/',(req,res)=>{
-    res.send(`Hello world from the server`)
-})
+// app.get('/',(req,res)=>{
+//     res.send(`Hello world from the server`)
+// })
 app.get('/about',middleware,(req,res)=>{
     console.log('Hello About')
     res.send(`About from the server`)
