@@ -8,6 +8,8 @@ router.get('/',(req,res)=>{
     res.send(`Hello world from the server Router JS`)
 })
 
+//Registeration Route
+
 //Using Promises
 // router.post('/register',  (req,res)=>{
 //     const {name, email,phone, work, password, cpassword} = req.body
@@ -38,7 +40,7 @@ router.get('/',(req,res)=>{
 router.post('/register', async (req,res)=>{
     const {name, email,phone, work, password, cpassword} = req.body
  
-    if(!name ||  !email || !phone || !work || !password || !cpassword){
+    if(!name || !email || !phone || !work || !password || !cpassword){
         return res.status(422).json({error:"All the Fields are Required"})
     }
     try{
@@ -50,7 +52,7 @@ router.post('/register', async (req,res)=>{
 
         const user = new User({name, email,phone, work, password, cpassword})
 
-        const userRegister = await user.save()
+        await user.save()
 
         res.status(201).json({message:"User Registered Successfully"})
     }
@@ -58,6 +60,26 @@ router.post('/register', async (req,res)=>{
         err => console.log(err)
     }
     
+})
+
+//Login Route
+
+router.post('/signin', async (req,res)=>{
+    try{
+        const {email, password} = req.body
+        if(!email || !password){
+            return res.status(400).json({message:"Please Fill the Data"})
+        }
+        const userLogin = await User.findOne({email:email})
+
+        if(!userLogin){
+            res.status(400).json({error:"Invalid Credentials"})
+        }else{
+            res.json({message:"User Login Successfully"})
+        }
+    }catch(err){
+        console.log(err)
+    }
 })
 
 
