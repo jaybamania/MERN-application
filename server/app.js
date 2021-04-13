@@ -27,6 +27,7 @@ app.get('/about',middleware,(req,res)=>{
     res.send(`About from the server`)
 })
 app.get('/contact',(req,res)=>{
+    res.cookie("Testing", "Contact-Tab")
     res.send(`contact from the server`)
 })
 app.get('/signin',(req,res)=>{
