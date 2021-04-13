@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
 
 require('../db/conn')
 
@@ -74,6 +75,7 @@ router.post('/register', async (req,res)=>{
 router.post('/signin', async (req,res)=>{
     try{
         const {email, password} = req.body
+        let token
         if(!email || !password){
             return res.status(400).json({message:"Please Fill the Data"})
         }
@@ -82,6 +84,9 @@ router.post('/signin', async (req,res)=>{
 
         if(userLogin){
             const isMatch = await bcrypt.compare(password, userLogin.password)
+
+            token = await userLogin.generateAuthToken();
+            console.log(token)
 
             if(!isMatch){
                 res.status(400).json({error:"Invalid Credentials"})
