@@ -5,7 +5,7 @@ import {
     CssBaseline,
     Checkbox,
     FormControlLabel,
-    Link,
+    // Link,
     Paper,
     Grid,
     Typography
@@ -21,18 +21,18 @@ import { makeStyles } from '@material-ui/core/styles';
 import {NavLink} from 'react-router-dom'
 import FormFields from './FormFields';
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+// function Copyright() {
+//   return (
+//     <Typography variant="body2" color="textSecondary" align="center">
+//       {'Copyright © '}
+//       <Link color="inherit" href="https://material-ui.com/">
+//         Your Website
+//       </Link>{' '}
+//       {new Date().getFullYear()}
+//       {'.'}
+//     </Typography>
+//   );
+// }
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -99,7 +99,8 @@ const Login = () => {
             {
               formFields.map(formField => {
                 return(
-                  <FormFields 
+                  <FormFields
+                    key={formField.name} 
                     name={formField.name}
                     type={formField.type}
                     label={formField.label}
@@ -145,36 +146,3 @@ const Login = () => {
 }
 
 export default Login
-
-          {/* <TextField
-              variant="outlined"
-              margin="normal"
-              // required
-              fullWidth
-              id="email"
-              label={
-                <div className={classes.label}>
-                  <EmailIcon />&nbsp;
-                  <span>Email Address*</span>
-                </div>
-              }
-              name="email"
-              // autoComplete="email"
-              // autoFocus
-            /> */}
-            {/* <TextField
-              variant="outlined"
-              margin="normal"
-              // required
-              fullWidth
-              name="password"
-              label={
-                <div className={classes.label}>
-                  <LockIcon />&nbsp;
-                  <span>Password*</span>
-                </div>
-              }
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            /> */}

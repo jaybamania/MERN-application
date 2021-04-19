@@ -3,9 +3,9 @@ import {
     Avatar,
     Button,
     CssBaseline,
-    Checkbox,
-    FormControlLabel,
-    Link,
+    // Checkbox,
+    // FormControlLabel,
+    // Link,
     Paper,
     Grid,
     Typography
@@ -16,24 +16,24 @@ import {
 import PersonIcon from '@material-ui/icons/Person';
 import EmailIcon from '@material-ui/icons/Email';
 import PhoneIcon from '@material-ui/icons/Phone';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+// import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { makeStyles } from '@material-ui/core/styles';
 
-import {NavLink} from 'react-router-dom'
+// import {NavLink} from 'react-router-dom'
 import FormFields from './FormFields';
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+// function Copyright() {
+//   return (
+//     <Typography variant="body2" color="textSecondary" align="center">
+//       {'Copyright © '}
+//       <Link color="inherit" href="https://material-ui.com/">
+//         Your Website
+//       </Link>{' '}
+//       {new Date().getFullYear()}
+//       {'.'}
+//     </Typography>
+//   );
+// }
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -94,7 +94,7 @@ const formFields = [
   }
 ]
 
-const Login = () => {
+const Contact = () => {
   const classes = useStyles();
 
   return (
@@ -141,37 +141,4 @@ const Login = () => {
   );
 }
 
-export default Login
-
-          {/* <TextField
-              variant="outlined"
-              margin="normal"
-              // required
-              fullWidth
-              id="email"
-              label={
-                <div className={classes.label}>
-                  <EmailIcon />&nbsp;
-                  <span>Email Address*</span>
-                </div>
-              }
-              name="email"
-              // autoComplete="email"
-              // autoFocus
-            /> */}
-            {/* <TextField
-              variant="outlined"
-              margin="normal"
-              // required
-              fullWidth
-              name="password"
-              label={
-                <div className={classes.label}>
-                  <LockIcon />&nbsp;
-                  <span>Password*</span>
-                </div>
-              }
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            /> */}
+export default Contact

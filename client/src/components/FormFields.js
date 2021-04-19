@@ -45,12 +45,12 @@ const FormFields = (props) => {
                 name={name}
                 id={name}  
                 type={type}
-                multiline={type=="textarea"?true:false}
-                rows={type=="textarea"?"5":"1"}
+                multiline={type==="textarea"?true:false}
+                rows={type==="textarea"?"5":"1"}
                 {...rest}
                 className={classes.fields}
                 onChange={handleInput}
-                value={value.user}
+                value={value}
             />
         </>
     )

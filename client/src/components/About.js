@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import SwipeableViews from 'react-swipeable-views';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import {
-    Paper,
+    // Paper,
     Tabs,
     Tab,
     Box,
@@ -100,10 +100,10 @@ const About = () => {
     //         </div>
     //     </div>
     // </div>
-    <div className="card m-auto my-2 t-3 p-4 col-12  col-lg-6 offset-lg-1 shadow" >
+    <div className="card m-auto my-2 t-3 p-4 col-12  col-lg-6 offset-lg-1" >
     <div className="row justify-center">
         <div className="col-12 col-lg-4">
-            <img className="img-thumbnail  shadow" src="https://pbs.twimg.com/profile_banners/1187404980988198914/1601635305"  alt="Card image cap" />
+            <img className="img-thumbnail  shadow" src="https://pbs.twimg.com/profile_banners/1187404980988198914/1601635305"  alt="Card cap" />
         </div>
         <div className="col-12 col-lg-8 ">
         <div className="card-body  ">
@@ -161,11 +161,11 @@ const About = () => {
       </SwipeableViews>
     </div>
             </div>
-            {/*  */}
+        
             <h5 className="card-title">Card title</h5>
             <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
             </div>
-            <ul className="list-group list-group-flush">
+            {/* <ul className="list-group list-group-flush">
             <li className="list-group-item">Cras justo odio</li>
             <li className="list-group-item">Dapibus ac facilisis in</li>
             <li className="list-group-item">Vestibulum at eros</li>
@@ -173,7 +173,7 @@ const About = () => {
             <div className="card-body">
             <a href="#" className="card-link">Card link</a>
             <a href="#" className="card-link">Another link</a>
-            </div>
+            </div> */}
         </div>
     </div>
     

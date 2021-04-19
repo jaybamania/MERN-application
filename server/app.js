@@ -7,7 +7,7 @@ require('./db/conn')
 app.use(express.json())
 // const USER = require('./model/userSchema')
 
-const PORT  = process.env.PORT
+const PORT  = process.env.PORT || 5000
 
 //linking router files
 app.use(require('./router/auth'))

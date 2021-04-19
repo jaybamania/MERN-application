@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
+// import TextField from '@material-ui/core/TextField';
+// import FormControlLabel from '@material-ui/core/FormControlLabel';
+// import Checkbox from '@material-ui/core/Checkbox';
+// import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
-import Box from '@material-ui/core/Box';
+// import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 //Form Icons
@@ -23,18 +23,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import {NavLink, useHistory} from 'react-router-dom'
 
 import FormFields from './FormFields';
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+// import SnackBars from './SnackBars'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -68,51 +57,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const formFields = [
-  {
-    name:"name",
-    label:"Name",
-    type:"text",
-    icon:<PersonIcon />
-  },
-  {
-    name:"email",
-    label:"Email Address",
-    type:"email",
-    icon:<EmailIcon />
-  },
-  {
-    name:"phone",
-    label:"Phone No.",
-    type:"text",
-    icon:<PhoneIcon />
-  },
-  {
-    name:"work",
-    label:"Work",
-    type:"text",
-    icon:<WorkIcon />
-  },
-  {
-    name:"password",
-    label:"Password",
-    type:"password",
-    icon:<LockIcon />
-  },
-  {
-    name:"cpassword",
-    label:"Confirm Password",
-    type:"password",
-    icon:<LockIcon />
-  }
-]
-
-
+// async componentDidMount() {
+//   // POST request using axios with async/await
+//   const article = { title: 'React POST Request Example' };
+//   const response = await axios.post('https://reqres.in/api/articles', article);
+//   this.setState({ articleId: response.data.id });
+// }
 
 const SignUp = () => {
   const classes = useStyles();
   const history = useHistory()
-
+  // const [error, setError] = useState("")
   const [user, setUser] = useState({
     name:"",
     email:"",
@@ -121,6 +76,51 @@ const SignUp = () => {
     password:"",
     cpassword:""
   })
+
+  const formFields = [
+    {
+      name:"name",
+      label:"Name",
+      type:"text",
+      icon:<PersonIcon />,
+      value: user.name
+    },
+    {
+      name:"email",
+      label:"Email Address",
+      type:"email",
+      icon:<EmailIcon />,
+      value: user.email
+    },
+    {
+      name:"phone",
+      label:"Phone No.",
+      type:"text",
+      icon:<PhoneIcon />,
+      value: user.phone
+    },
+    {
+      name:"work",
+      label:"Work",
+      type:"text",
+      icon:<WorkIcon />,
+      value: user.work
+    },
+    {
+      name:"password",
+      label:"Password",
+      type:"password",
+      icon:<LockIcon />,
+      value: user.password
+    },
+    {
+      name:"cpassword",
+      label:"Confirm Password",
+      type:"password",
+      icon:<LockIcon />,
+      value: user.cpassword
+    }
+  ]
 
   let getname, getvalue
   const handleInput = (e) =>{
@@ -131,29 +131,38 @@ const SignUp = () => {
     setUser({...user, [getname]:getvalue})
 }
 
+
 const PostData = async (e) =>{
     e.preventDefault()
     const {name, email, phone, work, password, cpassword} = user
-
-    const res = await fetch("/register",{
-      method:"POST",
-      headers:{
-        "Content-Type":"application/json"
-      },
+    console.log(user)
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         name, email, phone, work, password, cpassword
       })
-    })
+  };
+  console.log(requestOptions.body)
+  // fetch('https://jsonplaceholder.typicode.com/posts', requestOptions)
+  //     .then(response => response.json())
+  //     .then(data => setPostId(data.id));
 
+    const res = await fetch("/register",requestOptions)
+    
     const data = await res.json()
-    if(data.status === 422 || !data){
-      window.alert("Invalid Registeration")
-      console.log("Invalid Registeration")
-    }else{
-      window.alert("Registeration Successfull")
+    console.log(data)
+    if(data.status === 201 || (!data.error && data.message === 'User Registered Successfully') ){
       console.log("Registeration Successfull")
+      window.alert("Registeration Successfull")
       
-      history.push('/login')
+      history.push("/login")
+      
+    }else{
+      // setError("Invalid Registeration")
+      console.log("Invalid Registeration")
+      window.alert("Invalid Registeration")
+      
     }
 }
 
@@ -174,21 +183,22 @@ const PostData = async (e) =>{
               formFields.map(formField => {
                 return(
                   <FormFields
+                    key={formField.name}
                     name={formField.name}
                     label={formField.label}
                     type={formField.type}
                     icon={formField.icon}
-                    value={user}
+                    value={formField.value}
                     handleInput={handleInput}
                   />
                 )
               })
             }
             
-            <FormControlLabel
+            {/* <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Readed Privacy"
-            />
+            /> */}
             <Button
               type="submit"
               fullWidth
@@ -214,6 +224,10 @@ const PostData = async (e) =>{
             {/* <Box mt={5}>
               <Copyright />
             </Box> */}
+            {/* <SnackBars 
+              error={error}
+              opens={true}
+            /> */}
           </form>
         </div>
       </Grid>
