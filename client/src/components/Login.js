@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
     Avatar,
     Button,
@@ -18,7 +18,7 @@ import LockIcon from '@material-ui/icons/Lock';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { makeStyles } from '@material-ui/core/styles';
 
-import {NavLink} from 'react-router-dom'
+import {NavLink, useHistory} from 'react-router-dom'
 import FormFields from './FormFields';
 
 // function Copyright() {
@@ -65,23 +65,64 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const formFields = [
-  {
-    name:"email",
-    label:"Email Address",
-    type:"email",
-    icon:<EmailIcon />
-  },
-  {
-    name:"password",
-    label:"Password",
-    type:"password",
-    icon:<LockIcon />
-  }
-]
+
 
 const Login = () => {
   const classes = useStyles();
+  const history = useHistory()
+
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
+  const formFields = [
+    {
+      name:"email",
+      label:"Email Address",
+      type:"email",
+      icon:<EmailIcon />,
+      value:email
+    },
+    {
+      name:"password",
+      label:"Password",
+      type:"password",
+      icon:<LockIcon />,
+      value:password
+    }
+  ]
+
+  const LoginUser = async (e) => {
+    e.preventDefault()
+
+    const requestOptions = {
+      method: 'POST',
+      headers: {
+        'Content-Type' : 'application/json'
+      },
+      body: JSON.stringify({
+        email, password
+      })
+    }
+
+    const res = await fetch('/signin', requestOptions)
+    console.log(res)
+    const data = res.json()
+    console.log(data)
+    if( res.status === 400 || !data){
+      console.log("Invalid Credentials")
+      window.alert("Invalid Credentials")
+      
+      
+    }else{
+      // setError("Invalid Registeration")
+      console.log("Login Successfully")
+      window.alert("Login Successfully")
+      
+      history.push("/")
+      
+    }
+
+  }
 
   return (
     <Grid container component="main" className={classes.root}>
@@ -95,7 +136,7 @@ const Login = () => {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <form className={classes.form} noValidate>
+          <form className={classes.form} method="POST">
             {
               formFields.map(formField => {
                 return(
@@ -105,6 +146,10 @@ const Login = () => {
                     type={formField.type}
                     label={formField.label}
                     icon={formField.icon}
+                    value={formField.value}
+                    handleInput={(e) => {
+                      formField.name==='email'? setEmail(e.target.value) : setPassword(e.target.value)
+                    }}
                   />
                 )
               })
@@ -120,6 +165,7 @@ const Login = () => {
               variant="contained"
               color="primary"
               className={classes.submit}
+              onClick={LoginUser}
             >
               Sign In
             </Button>

@@ -96,12 +96,12 @@ router.post('/signin', async (req,res)=>{
             })
 
             if(!isMatch){
-                res.status(400).json({error:"Invalid Credentials"})
+                res.status(400).json({error:"Invalid Password"})
             }else{
                 res.json({message:"User Login Successfully"})
             }       
         }else{
-            res.status(400).json({error:"Invalid Credentials"})
+            res.status(400).json({error:"Invalid Email"})
         }
 
         
