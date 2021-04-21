@@ -6,6 +6,9 @@ const jwt = require('jsonwebtoken')
 require('../db/conn')
 
 const User = require('../model/userSchema')
+
+const authenticate = require('../middleware/authenticate')
+
 router.get('/',(req,res)=>{
     res.send(`Hello world from the server Router JS`)
 })
@@ -108,6 +111,13 @@ router.post('/signin', async (req,res)=>{
     }catch(err){
         console.log(err)
     }
+})
+
+//About Us Routing
+
+router.get('/about',authenticate,(req,res)=>{
+    console.log('Hello About')
+    res.send(`About from the server`)
 })
 
 
