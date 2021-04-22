@@ -202,6 +202,7 @@ const ContactForm = async (e) =>{
                         icon={formField.icon}
                         value={formField.value}
                         handleInput={handleInput}
+                        key={formField.name}
                       /> : <>
                         <InputLabel htmlFor="outlined-adornment-amount">{formField.label}</InputLabel>
                         <OutlinedInput

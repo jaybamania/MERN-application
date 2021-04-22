@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import {
     Avatar,
     Button,
@@ -20,6 +20,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import {NavLink, useHistory} from 'react-router-dom'
 import FormFields from './FormFields';
+import { UserContext } from '../App';
 
 // function Copyright() {
 //   return (
@@ -71,6 +72,8 @@ const Login = () => {
   const classes = useStyles();
   const history = useHistory()
 
+  const {state, dispatch} = useContext(UserContext)
+
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
@@ -115,6 +118,7 @@ const Login = () => {
       
     }else{
       // setError("Invalid Registeration")
+      dispatch({type:"USER", payload:true})
       console.log("Login Successfully")
       window.alert("Login Successfully")
       

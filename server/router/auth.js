@@ -150,4 +150,12 @@ router.post('/contact',authenticate, async (req,res)=>{
     }
 })
 
+//Logout Routing
+
+router.get('/logout',(req,res)=>{
+    console.log('Hello my Logout')
+    res.clearCookie('jwtoken',{path:'/'})
+    res.status(200).send(req.rootUser)
+})
+
 module.exports = router
