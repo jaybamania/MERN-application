@@ -22,7 +22,6 @@ const useStyles = makeStyles((theme) => ({
 const FormFields = (props) => {
     const {name, type,label,value,handleInput, icon , ...rest} = props
     const classes = useStyles()
-
     // let getname, getvalue
     // const handleInput = (e) =>{
     //     console.log(e)
@@ -44,6 +43,7 @@ const FormFields = (props) => {
                 }
                 name={name}
                 id={name}  
+                
                 type={type}
                 multiline={type==="textarea"?true:false}
                 rows={type==="textarea"?"5":"1"}

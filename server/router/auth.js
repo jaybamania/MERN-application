@@ -117,8 +117,37 @@ router.post('/signin', async (req,res)=>{
 
 router.get('/about',authenticate,(req,res)=>{
     console.log('Hello About')
-    res.send(`About from the server`)
+    res.send(req.rootUser)
 })
 
+
+//to get data in home and contact page
+router.get('/data',authenticate,(req,res)=>{
+    console.log('Hello About')
+    res.send(req.rootUser)
+})
+
+//send message in contact page
+router.post('/contact',authenticate, async (req,res)=>{
+    try{
+        const {name, email, phone, message} = req.body
+
+        if(!name || !email || !phone || !message){
+            console.log("All Fields are require")
+            return res.json({error:"Please Fill the Contact Form Details"})
+        }
+
+        const userContact = await User.findOne({_id:req.userID})
+        if(userContact){
+            const userMessage = await userContact.addMessage(name, email,phone, message)
+
+            await userContact.save()
+
+            res.status(201).json({message:"Message Sent Successfully"})
+        }
+    }catch(error){
+        console.log(error)
+    }
+})
 
 module.exports = router
