@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useRef } from 'react'
 import { useHistory } from 'react-router-dom'
 import { UserContext } from '../App'
 
@@ -6,17 +6,22 @@ const Logout = () => {
 
     const history = useHistory()
 
-    const {state,dispatch} = useContext(UserContext)
+    const {dispatch} = useContext(UserContext)
 
     useEffect(()=>{
+        
         fetch('/logout',{
             method:"GET",
             headers:{
                
                 "Content-Type" : "application/json"
             },
+            // body:{
+            //     state
+            // }
             
         }).then((res)=>{
+
             dispatch({type:"USER",payload:false})
             history.push('/login',{ replace:true})
             if(res.status !== 200){

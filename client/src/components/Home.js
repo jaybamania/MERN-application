@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, {  useEffect, useState } from 'react'
 // import {
 //     Grid,
 // } from '@material-ui/core'
@@ -24,7 +24,7 @@ import React, { useEffect, useState } from 'react'
 const Home = () => {
     // const classes = useStyles()
     const [userData, setUserData] = useState({name:"", work:""});
-    const callHomePage = async () =>{
+    const callHomePage =  async () =>{
         try{
           const res = await fetch('/data',{
             method:"GET",
@@ -49,8 +49,8 @@ const Home = () => {
     
     useEffect(() => {
       callHomePage()
-      
-    }, [])
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[])
     return (
         <div  >
             {/* <Grid container xs={12} sm={12} md={12} className={classes.image} /> */}

@@ -13,8 +13,8 @@ import { UserContext } from '../App';
 
 const Navbars = () => {
 
-    const {state, dispatch} = useContext(UserContext)
-
+    const {state} = useContext(UserContext)
+    console.log(state)
     const RenderTabs = ()=>{
         return(
             <Nav className="ml-auto">

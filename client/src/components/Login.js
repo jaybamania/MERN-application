@@ -72,10 +72,11 @@ const Login = () => {
   const classes = useStyles();
   const history = useHistory()
 
-  const {state, dispatch} = useContext(UserContext)
+  const { state, dispatch} = useContext(UserContext)
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+
 
   const formFields = [
     {
@@ -103,7 +104,7 @@ const Login = () => {
         'Content-Type' : 'application/json'
       },
       body: JSON.stringify({
-        email, password
+        email, password, state
       })
     }
 

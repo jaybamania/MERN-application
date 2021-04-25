@@ -79,7 +79,7 @@ router.post('/register', async (req,res)=>{
 
 router.post('/signin', async (req,res)=>{
     try{
-        const {email, password} = req.body
+        const {email, password,state} = req.body
         let token
         if(!email || !password){
             return res.status(400).json({message:"Please Fill the Data"})
@@ -101,6 +101,7 @@ router.post('/signin', async (req,res)=>{
             if(!isMatch){
                 res.status(400).json({error:"Invalid Password"})
             }else{
+                // isLoggedIn = await userLogin.checkUserLogin(state);
                 res.json({message:"User Login Successfully"})
             }       
         }else{
@@ -153,9 +154,12 @@ router.post('/contact',authenticate, async (req,res)=>{
 //Logout Routing
 
 router.get('/logout',(req,res)=>{
+    // const {stateRef} = req.body
     console.log('Hello my Logout')
     res.clearCookie('jwtoken',{path:'/'})
+    // const isLoggedIn = await userLogin.checkUserLogin({isLoggedIn:stateRef});
     res.status(200).send(req.rootUser)
+    
 })
 
 module.exports = router

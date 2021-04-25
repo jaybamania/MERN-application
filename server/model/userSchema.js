@@ -31,6 +31,10 @@ const userSchema = new mongoose.Schema({
         type:Date,
         default:Date.now
     },
+    isLoggedIn:{
+        type:Boolean,
+        default:false
+    },
     messages:[
         {
             name:{
@@ -89,6 +93,18 @@ userSchema.methods.addMessage = async function(name, email,phone, message){
         this.messages = this.messages.concat({name, email,phone, message})
         await this.save()
         return this.messages
+    }catch(error){
+        console.log(error)
+    }
+}
+
+//check the user logged in or not
+
+userSchema.methods.checkUserLogin = async function(state){
+    try{
+        this.isLoggedIn = state
+        await this.save()
+        return this.isLoggedIn
     }catch(error){
         console.log(error)
     }

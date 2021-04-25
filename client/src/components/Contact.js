@@ -143,7 +143,7 @@ const Contact = () => {
 
 useEffect(() => {
   callContactPage()
-  
+  // eslint-disable-next-line react-hooks/exhaustive-deps
 }, [])
 
 const handleInput = (e)=>{

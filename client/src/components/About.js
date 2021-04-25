@@ -78,7 +78,7 @@ const About = () => {
   const theme = useTheme();
   const [value, setValue] = useState(0);
   const [userData, setUserData] = useState({});
-  const [timelines, setTimeLines] = useState({});
+  // const [timelines, setTimeLines] = useState({});
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -116,7 +116,7 @@ const About = () => {
 
   useEffect(() => {
     callAboutPage()
-    
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   return (
     <div className="card m-auto my-2 t-3 p-4 col-12  col-lg-6 offset-lg-1" >
@@ -177,7 +177,7 @@ const About = () => {
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
           <TimeLine 
-            timeline={timelines}
+            // timeline={timelines}
           />
         </TabPanel>
       </SwipeableViews>
